@@ -2,9 +2,9 @@ name: ci-test
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
   pull_request:
-    branches: [master]
+    branches: [ master ]
 
 jobs:
   test:
@@ -16,7 +16,7 @@ jobs:
       # Label used to access the service container
       postgres:
         # Docker Hub image
-        image: postgres:16
+        image: postgres:16-alpine
         # Provide the password for postgres
         env:
           POSTGRES_USER: root
@@ -41,7 +41,7 @@ jobs:
     - name: checkout code into the go module directory
       uses: actions/checkout@v2
 
-    - name: Run migration
+    - name: run migration
       run: make migrateup
 
     - name: Test
