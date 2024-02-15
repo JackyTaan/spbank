@@ -10,25 +10,24 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-
-    # # Service containers to run with `container-job`
-    # services:
-    #   # Label used to access the service container
-    #   postgres:
-    #     # Docker Hub image
-    #     image: postgres:16-alpine
-    #     # Provide the password for postgres
-    #     env:
-    #       POSTGRES_USER: root
-    #       POSTGRES_PASSWORD: secret
-    #       POSTGRES_DB: simple_bank
-    #       POSTGRES_PORT: 5432
-    #     # Set health checks to wait until postgres has started
-    #     options: >-
-    #       --health-cmd pg_isready
-    #       --health-interval 10s
-    #       --health-timeout 5s
-    #       --health-retries 5
+    # Service containers to run with `container-job`
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres:16
+        # Provide the password for postgres
+        env:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: secret
+          POSTGRES_DB: simple_bank
+          POSTGRES_PORT: 5432
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
     
@@ -40,6 +39,9 @@ jobs:
 
     - name: checkout code into the go module directory
       uses: actions/checkout@v2
+
+    - name: Run migration
+      run: make migrateup 
 
     - name: Test
       run: make test
