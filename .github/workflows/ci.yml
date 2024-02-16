@@ -15,7 +15,7 @@ jobs:
       # Label used to access the service container
       postgres:
         # Docker Hub image
-        image: postgres:16-alpine
+        image: postgres:16
         # Provide the password for postgres
         env:
           POSTGRES_USER: root
@@ -43,8 +43,8 @@ jobs:
 
     - name: Install golang-migrate
       run: |
-        curl -L https://github.com/golang-migrate/migrate/releases/download/v4.17.0/migrate.darwin-amd64.tar.gz | tar xvz
-        sudo mv migrate /usr/bin/migrate
+        curl -L https://github.com/golang-migrate/migrate/releases/download/v4.17.0/migrate.darwin-amd64.tar.gz | tar xvz | 
+        sudo mv migrate /usr/bin/migrate | 
         which migrate
 
     - name: Run migration
