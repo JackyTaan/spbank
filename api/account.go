@@ -9,7 +9,7 @@ import (
 	"github.com/lib/pq"
 )
 
-// for create
+// for creating account request
 type createAccountRequest struct {
 	Owner    string `json:"owner" binding:"required"`
 	Currency string `json:"currency" binding:"required,currency"`
